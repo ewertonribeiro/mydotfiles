@@ -10,7 +10,7 @@ an executable
 -- general
 lvim.log.level = "warn"
 lvim.format_on_save = false
-lvim.colorscheme = "nordic"
+lvim.colorscheme = "onedark"
 -- to disable icons and use a minimalist setup, uncomment the following
 -- lvim.use_icons = false
 
@@ -184,6 +184,7 @@ lvim.plugins = {
   { 'olimorris/onedarkpro.nvim' },
   { "ellisonleao/gruvbox.nvim" },
   { 'sainnhe/sonokai' },
+  { 'navarasu/onedark.nvim' },
   { 'weilbith/nvim-code-action-menu', cmd = 'CodeActionMenu' },
   { 'hood/popui.nvim' },
   { 'RishabhRD/popfix' },
@@ -255,15 +256,21 @@ lvim.plugins = {
       vim.cmd [[packadd telescope.nvim]]
     end,
   },
-  {
-    "tzachar/cmp-tabnine",
-    run = "./install.sh",
-    requires = "hrsh7th/nvim-cmp",
-    event = "InsertEnter",
-  },
   { "tpope/vim-repeat" },
   { 'andersevenrud/nordic.nvim' },
-  { 'getomni/neovim' }
+  { 'getomni/neovim' },
+  {
+    "folke/noice.nvim",
+    event = "VimEnter",
+    config = function()
+      require("noice").setup()
+    end,
+    requires = {
+      -- if you lazy-load any plugin below, make sure to add proper `module="..."` entries
+      "MunifTanjim/nui.nvim",
+      "rcarriga/nvim-notify",
+    }
+  }
 }
 
 vim.ui.select = require "popui.ui-overrider"
@@ -287,3 +294,8 @@ require('goto-preview').setup {
 require('numb').setup()
 require('nvim-ts-autotag').setup()
 require("todo-comments").setup {}
+-- require("telescope").load_extension("noice")
+require('onedark').setup {
+    style = 'cool'
+}
+require('onedark').load()
