@@ -10,7 +10,7 @@ an executable
 -- general
 lvim.log.level = "warn"
 lvim.format_on_save = false
-lvim.colorscheme = "onedark"
+lvim.colorscheme = "onedarkpro"
 -- to disable icons and use a minimalist setup, uncomment the following
 -- lvim.use_icons = false
 
@@ -32,7 +32,7 @@ lvim.keys.normal_mode['td'] = ':bd<CR>'
 
 
 vim.opt.relativenumber = true
-lvim.transparent_window = true
+-- lvim.transparent_window = true
 -- lvim.keys.normal_mode["<S-l>"] = ":BufferLineCycleNext<CR>"
 -- lvim.keys.normal_mode["<S-h>"] = ":BufferLineCyclePrev<CR>"
 -- unmap a default keymapping
@@ -74,7 +74,6 @@ lvim.transparent_window = true
 -- After changing plugin config exit and reopen LunarVim, Run :PackerInstall :PackerCompile
 lvim.builtin.alpha.active = true
 lvim.builtin.alpha.mode = "dashboard"
-lvim.builtin.notify.active = true
 lvim.builtin.terminal.active = true
 lvim.builtin.nvimtree.setup.view.side = "left"
 lvim.builtin.nvimtree.setup.renderer.icons.show.git = false
@@ -142,7 +141,7 @@ lvim.builtin.treesitter.highlight.enabled = true
 -- -- set a formatter, this will override the language server formatting capabilities (if it exists)
 local formatters = require "lvim.lsp.null-ls.formatters"
 formatters.setup {
-  -- { command = "black", filetypes = { "python" } },
+  { command = "black", filetypes = { "python" } },
   -- { command = "isort", filetypes = { "python" } },
   {
     -- each formatter accepts a list of options identical to https://github.com/jose-elias-alvarez/null-ls.nvim/blob/main/doc/BUILTINS.md#Configuration
@@ -158,8 +157,8 @@ formatters.setup {
 -- -- set additional linters
 local linters = require "lvim.lsp.null-ls.linters"
 linters.setup {
-  { command = "eslint_d", filetypes = { "typescript", "typescriptreact", "javascript", "javascriptreact" } }
-  -- { command = "flake8", filetypes = { "python" } },
+  -- { command = "eslint_d", filetypes = { "typescript", "typescriptreact", "javascript", "javascriptreact" } },
+  -- { command = "black", filetypes = { "python" } },
   -- {
   --   -- each linter accepts a list of options identical to https://github.com/jose-elias-alvarez/null-ls.nvim/blob/main/doc/BUILTINS.md#Configuration
   --   command = "shellcheck",
@@ -185,10 +184,18 @@ lvim.plugins = {
   { "ellisonleao/gruvbox.nvim" },
   { 'sainnhe/sonokai' },
   { 'navarasu/onedark.nvim' },
-  { 'weilbith/nvim-code-action-menu', cmd = 'CodeActionMenu' },
   { 'hood/popui.nvim' },
   { 'RishabhRD/popfix' },
   { "stevearc/dressing.nvim" },
+  {
+    "catppuccin/nvim",
+    as = "catppuccin",
+    config = function()
+      require("catppuccin").setup {
+        flavour = "frappe" -- mocha, macchiato, frappe, latte
+      }
+    end
+  },
   {
     'kosayoda/nvim-lightbulb',
     requires = 'antoinemadec/FixCursorHold.nvim',
@@ -232,16 +239,6 @@ lvim.plugins = {
     }
   },
   {
-    'wfxr/minimap.vim',
-    run = "cargo install --locked code-minimap",
-    cmd = { "Minimap", "MinimapClose", "MinimapToggle", "MinimapRefresh", "MinimapUpdateHighlight" },
-    config = function()
-      vim.cmd("let g:minimap_width = 10")
-      vim.cmd("let g:minimap_auto_start = 1")
-      vim.cmd("let g:minimap_auto_start_win_enter = 1")
-    end,
-  },
-  {
     "f-person/git-blame.nvim",
     event = "BufRead",
     config = function()
@@ -258,19 +255,31 @@ lvim.plugins = {
   },
   { "tpope/vim-repeat" },
   { 'andersevenrud/nordic.nvim' },
-  { 'getomni/neovim' },
-  {
-    "folke/noice.nvim",
-    event = "VimEnter",
-    config = function()
-      require("noice").setup()
-    end,
-    requires = {
-      -- if you lazy-load any plugin below, make sure to add proper `module="..."` entries
-      "MunifTanjim/nui.nvim",
-      "rcarriga/nvim-notify",
-    }
-  }
+  -- {
+  --   "folke/noice.nvim",
+  --   event = "VimEnter",
+  --   config = function()
+  --     require("noice").setup({
+  --       lsp = {
+  --         signature = {
+  --           enabled = false,
+  --           auto_open = {
+  --             enabled = false,
+  --             trigger = false, -- Automatically show signature help when typing a trigger character from the LSP
+  --             luasnip = false, -- Will open signature help when jumping to Luasnip insert nodes
+  --             throttle = 50, -- Debounce lsp signature help request by 50ms
+  --           },
+  --         }
+  --       }
+  --     })
+  --   end,
+  --   requires = {
+  --     -- if you lazy-load any plugin below, make sure to add proper `module="..."` entries
+  --     "MunifTanjim/nui.nvim",
+  --     "rcarriga/nvim-notify",
+  --   }
+  -- },
+  { 'kevinhwang91/nvim-ufo', requires = 'kevinhwang91/promise-async' }
 }
 
 vim.ui.select = require "popui.ui-overrider"
@@ -296,6 +305,59 @@ require('nvim-ts-autotag').setup()
 require("todo-comments").setup {}
 -- require("telescope").load_extension("noice")
 require('onedark').setup {
-    style = 'cool'
+  style = 'cool'
 }
 require('onedark').load()
+
+
+
+vim.o.foldcolumn = '1' -- '0' is not bad
+vim.o.foldlevel = 99 -- Using ufo provider need a large value, feel free to decrease the value
+vim.o.foldlevelstart = 99
+vim.o.foldenable = true
+
+-- require("notify").setup({
+--   background_colour = "#000000",
+--   my_cool_setting = true,
+--   timeout = 200,
+--   minimum_width = 30,
+--   top_down = false,
+-- })
+
+local handler = function(virtText, lnum, endLnum, width, truncate)
+  local newVirtText = {}
+  local suffix = ('  %d '):format(endLnum - lnum)
+  local sufWidth = vim.fn.strdisplaywidth(suffix)
+  local targetWidth = width - sufWidth
+  local curWidth = 0
+  for _, chunk in ipairs(virtText) do
+    local chunkText = chunk[1]
+    local chunkWidth = vim.fn.strdisplaywidth(chunkText)
+    if targetWidth > curWidth + chunkWidth then
+      table.insert(newVirtText, chunk)
+    else
+      chunkText = truncate(chunkText, targetWidth - curWidth)
+      local hlGroup = chunk[2]
+      table.insert(newVirtText, { chunkText, hlGroup })
+      chunkWidth = vim.fn.strdisplaywidth(chunkText)
+      -- str width returned from truncate() may less than 2nd argument, need padding
+      if curWidth + chunkWidth < targetWidth then
+        suffix = suffix .. (' '):rep(targetWidth - curWidth - chunkWidth)
+      end
+      break
+    end
+    curWidth = curWidth + chunkWidth
+  end
+  table.insert(newVirtText, { suffix, 'MoreMsg' })
+  return newVirtText
+end
+
+-- global handler
+require('ufo').setup({
+  fold_virt_text_handler = handler
+})
+
+-- buffer scope handler
+-- will override global handler if it is existed
+local bufnr = vim.api.nvim_get_current_buf()
+require('ufo').setFoldVirtTextHandler(bufnr, handler)

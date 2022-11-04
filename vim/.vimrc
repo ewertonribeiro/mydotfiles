@@ -30,9 +30,12 @@ set termguicolors
 filetype on          " Detect and set the filetype option and trigger the FileType Event
 filetype plugin on   " Load the plugin file for the file type, if any
 filetype indent on   " Load the indent file for the file type, if any
-
+set background=dark
 """ PLUG
 call plug#begin()
+"""Auto Pairs
+Plug 'jiangmiao/auto-pairs'
+
 """ICONS
 Plug 'ryanoasis/vim-devicons'
 """NERDTREE
