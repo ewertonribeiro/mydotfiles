@@ -1,0 +1,58 @@
+[theme]
+name = "dracula"
+
+[icons]
+name = "awesome"
+
+[[block]]
+block = "temperature"
+
+[[block]]
+block = "music"
+max_width = 21
+marquee = false
+player = "spotify"
+buttons = ["play", "next"]
+ 
+[[block]]
+block = "load"
+interval = 1
+format = "{1m} {5m} {15m}"
+
+[[block]]
+block = "cpu"
+interval = 0.7
+ 
+[[block]]
+block = "memory"
+interval = 5
+display_type = "memory"
+format_mem = "{mem_used}/{mem_total}({mem_used_percents})"
+format_swap = "{swap_used}/{swap_total}({swap_used_percents})"
+ 
+[[block]]
+block = "disk_space"
+path = "/"
+alias = "/"
+info_type = "available"
+format = "{icon} {used}/{total} ({available} free)"
+unit = "GB"
+interval = 20
+ 
+[[block]]
+block = "battery"
+interval = 10
+format = "{percentage} {time}"
+ 
+[[block]]
+block = "sound"
+  
+[[block]]
+block = "time"
+locale = "pt_BR"
+
+[[block]]
+block = "custom"
+interval = 999999
+command = "echo '\uF011'"
+on_click = "i3-nagbar -t warning -m 'What do you want to do?' -b 'Shutdown' 'shutdown now' -b 'Hibernate' 'systemctl hibernate' -b 'Reboot' 'reboot'"
