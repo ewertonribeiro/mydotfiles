@@ -1,8 +1,8 @@
 [theme]
-name = "dracula"
+name = "modern"
 
 [icons]
-name = "awesome"
+name = "material-nf"
 
 [[block]]
 block = "temperature"
@@ -22,7 +22,13 @@ format = "{1m} {5m} {15m}"
 [[block]]
 block = "cpu"
 interval = 0.7
- 
+
+# [[block]]
+# block = "bluetooth"
+# mac = "A0:8A:F5:B8:01:FD"
+# format = "Rowkin {percentage}"
+# format_unavailable = "Rowkin x"
+
 [[block]]
 block = "memory"
 interval = 5
@@ -34,10 +40,10 @@ format_swap = "{swap_used}/{swap_total}({swap_used_percents})"
 block = "disk_space"
 path = "/"
 alias = "/"
-info_type = "available"
+# info_type = "available"
 format = "{icon} {used}/{total} ({available} free)"
-unit = "GB"
-interval = 20
+# unit = "GB"
+# interval = 20
  
 [[block]]
 block = "battery"
@@ -46,10 +52,15 @@ format = "{percentage} {time}"
  
 [[block]]
 block = "sound"
-  
+
 [[block]]
 block = "time"
 locale = "pt_BR"
+
+[[block]]
+block = "docker"
+interval = 1
+format = "{running}/{total}"
 
 [[block]]
 block = "custom"
