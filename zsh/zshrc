@@ -40,13 +40,6 @@ bindkey '^e' edit-command-line
 [ -f "$HOME/.config/shortcutrc" ] && source "$HOME/.config/shortcutrc"
 [ -f "$HOME/.config/aliasrc" ] && source "$HOME/.config/aliasrc"
 
-# #Load zsh-autosuggestions
-source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh 2>/dev/null
-# # Load zsh-syntax-highlighting; should be last.
-source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh 2>/dev/null
-
-
-
 #PATH
 export PATH=$PATH:$HOME/.local/bin
 export EDITOR="lvim"
@@ -56,11 +49,21 @@ alias ls="exa --color=always --icons"
 alias lsa="exa --color=always --icons --all"
 alias cat="bat"
 # alias nvim="lvim"
+
 ##ASDF
 . /opt/asdf-vm/asdf.sh
 
-# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
-
 #Remaps z to have bar
 xmodmap -e "keycode 52 = z Z z Z bar bar bar"
+
+# #Load zsh-autosuggestions
+source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
+# # Load zsh-syntax-highlighting; should be last.
+source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh 2>/dev/null
+##Load substring
+source /usr/share/zsh/plugins/zsh-history-substring-search/zsh-history-substring-search.zsh
+bindkey '^[[A' history-substring-search-up
+bindkey '^[[B' history-substring-search-down
+
+#Load autopairs
+source /usr/share/zsh/plugins/zsh-autopair/autopair.zsh
