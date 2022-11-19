@@ -2,6 +2,8 @@ font:
   normal:
      family: Hack NF
 
+
+  size: 17.0
 window:
   title: Alacritty
 
@@ -9,7 +11,7 @@ window:
     x: 6
     y: 6
 
-  opacity: 0.8
+  opacity: 0.9
   
   decorations: none
 
@@ -158,5 +160,9 @@ schemes:
       cyan:    '#59dffc'
       white:   '#e6e6d1'
 
+# Theme
+import:
+  - ~/.alacritty-colorscheme/themes/iterm.yaml
 
-colors: *GruvboxDark
+# colors: solarized_dark
+# colors: *GruvboxDark
