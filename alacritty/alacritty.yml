@@ -1,9 +1,13 @@
 font:
   normal:
-     family: Hack NF
+     family: FiraCode 
+     style: bold
 
 
-  size: 17.0
+  draw_bold_text_with_bright_colors: true
+
+  size: 15.0
+
 window:
   title: Alacritty
 
@@ -13,7 +17,7 @@ window:
 
   opacity: 0.9
   
-  decorations: none
+    #  decorations: none
 
 
 schemes:
@@ -105,64 +109,9 @@ schemes:
       cyan:    '#8ec07c'
       white:   '#ebdbb2'
 
-    ### Dracula ###
-  Dracula: &Dracula
-    primary:
-      background: '#282a36'
-      foreground: '#f8f8f2'
-    cursor:
-      text: CellBackground
-      cursor: CellForeground
-    vi_mode_cursor:
-      text: CellBackground
-      cursor: CellForeground
-    search:
-      matches:
-        foreground: '#44475a'
-        background: '#50fa7b'
-      focused_match:
-        foreground: '#44475a'
-        background: '#ffb86c'
-      bar:
-        background: '#282a36'
-        foreground: '#f8f8f2'
-    line_indicator:
-      foreground: None
-      background: None
-    selection:
-      text: CellForeground
-      background: '#44475a'
-    normal:
-      black:   '#000000'
-      red:     '#ff5555'
-      green:   '#50fa7b'
-      yellow:  '#f1fa8c'
-      blue:    '#bd93f9'
-      magenta: '#ff79c6'
-      cyan:    '#8be9fd'
-      white:   '#bfbfbf'
-    bright:
-      black:   '#4d4d4d'
-      red:     '#ff6e67'
-      green:   '#5af78e'
-      yellow:  '#f4f99d'
-      blue:    '#caa9fa'
-      magenta: '#ff92d0'
-      cyan:    '#9aedfe'
-      white:   '#e6e6e6'
-    dim:
-      black:   '#14151b'
-      red:     '#ff2222'
-      green:   '#1ef956'
-      yellow:  '#ebf85b'
-      blue:    '#4d5b86'
-      magenta: '#ff46b0'
-      cyan:    '#59dffc'
-      white:   '#e6e6d1'
 
 # Theme
 import:
-  - ~/.alacritty-colorscheme/themes/iterm.yaml
-
+ - ~/.alacritty-colorscheme/themes/dracula.yaml
 # colors: solarized_dark
-# colors: *GruvboxDark
+# colors: *DoomOne

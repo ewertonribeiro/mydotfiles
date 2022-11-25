@@ -1,43 +1,57 @@
-### Modifier Key
+################################################
+#                                              #
+#   Arch Linux GUI i3 WM Configuration File.   #
+#   Make a habit to read this file. You will   #
+#   find keybindings and various other         #
+#   settings here. Please see                  #
+#                                              #
+#       https://i3wm.org/docs/userguide.html   #
+#                                              #
+#   for a complete reference on moving forward #
+#   from what I have provided here.            #
+#                                              #
+################################################
+
+
+
+# This is our mod Key. Currently it is set to the Windows Key.
+# You can uncomment the line below to set 'Alt' key as the mod key.
+#set $mod Mod1
 set $mod Mod4
 
 # Font for window titles. Will also be used by the bar.
-font pango:Hack NF 16
+font pango:Hack NF 15
 
-### Start Alacritty
+# This font is widely installed, provides lots of unicode glyphs, right-to-left
+# text rendering and scalability on retina/hidpi displays (thanks to pango).
+#font pango:DejaVu Sans Mono 8
+
+# start a terminal. We use alacritty.
 bindsym $mod+Return exec alacritty
 
-### Start Kitty
-bindsym $mod+k exec kitty
-
-### Start a File Explorer
-bindsym $mod+n exec nautilus
-
-## #Enable Tap to Click
-exec xinput set-prop 15 "libinput Tapping Enabled" 1
-
-### kill focused window
+# kill focused window
 bindsym $mod+Shift+q kill
 
-### Rofi forest theme
-# bindsym $mod+d exec --no-startup-id rofi -no-config -no-lazy-grab -show drun -modi drun -theme ~/.config/polybar.old/forest/scripts/rofi/launcher.rasi
-bindsym $mod+d exec --no-startup-id rofi -no-lazy-grab -show drun -modi drun
+# start dmenu (a program launcher).
+# bindsym $mod+d exec --no-startup-id dmenu_run
+# A more modern dmenu replacement is rofi:
+# You have 2 options to launch rofi:
+# This mode search for .desktop files in /usr/share/applications.
+# This is the recommended mode. It searches for the programs as
+# defined in .desktop file, with their description, and corresponding
+# icons
+bindsym $mod+d exec --no-startup-id rofi -show drun -theme Monokai -icon-theme "Tela-circle" -show-icons
+
+# The other mode search for applications in /usr/bin or /usr/sbin.
+# This should only be used if a program lacks a .desktop file.
 bindsym $mod+Shift+d exec --no-startup-id rofi -show run -theme Monokai
 
-### Go To Next Workspace
-# bindsym $mod+l workspace next
-# bindsym $mod+Shift+h workspace previous
-bindsym $mod+Tab workspace back_and_forth
-
-### Launch Polybar. Take a look at ~/.confi/polybar/config to
-### configure the bar.
-# exec --no-startup-id polybar -r &
+# Launch Polybar. Take a look at ~/.confi/polybar/config to
+# configure the bar.
 exec_always --no-startup-id $HOME/.config/polybar/launch.sh
 
-### Display Wallpaper, always.
-# exec_always feh --bg-fill /usr/share/backgrounds/archlinux/landscape.jpg
-exec_always nitrogen --restore
-
+# Display Wallpaper, always.
+# exec_always feh --bg-fill /usr/share/backgrounds/i3/wall.png
 # Provide Gaps to Windows. Increase/Decrease as you like.
 #hide_edge_borders both
 for_window [class="^.*"] border pixel
@@ -48,14 +62,29 @@ bindsym $mod+Shift+z    gaps outer current minus 5
 
 #Compositor. This helps in transparency and fading.
 exec_always picom -f
-# exec_always picom --experimental-backends
 
 # Lock Screen This will yield a black lock screen, which
 # can be customized to your liking.
-bindsym $mod+x exec betterlockscreen -l -u "/home/ewerton/Imagens/BingWallpaper/20221116-Unesco50_PT-BR6043327844_UHD.jpg"
+bindsym $mod+x exec betterlockscreen -l
 
+# Shutdown the computer
+#bindsym $mod+Shift+s exec shutdown now
+
+#Reboot Machine
+#bindsym $mod+r exec systemctl reboot
+
+# Suspend the system to RAM (needs swap space)
+#bindsym $mod+s exec systemctl suspend
+
+# The combination of xss-lock, nm-applet and pactl is a popular choice, so
+# they are included here as an example. Modify as you see fit.
+
+# xss-lock grabs a logind suspend inhibit lock and will use i3lock to lock the
+# screen before suspend. Use loginctl lock-session to lock your screen.
+
+# The 4 lines of text above come from i3 documentation. Waking up from a suspended
 # system will launch betterlockscreen
-exec --no-startup-id xss-lock --transfer-sleep-lock -- betterlockscreen -l 
+exec --no-startup-id xss-lock --transfer-sleep-lock -- betterlockscreen -l
 
 # NetworkManager is the most popular way to manage wireless networks on Linux,
 # and nm-applet is a desktop environment-independent system tray GUI for it.
@@ -87,10 +116,10 @@ floating_modifier $mod
 # used for navigation in the window manager
 
 # 1A] change focus
-# bindsym $mod+j focus left
-# bindsym $mod+k focus down
-# bindsym $mod+l focus up
-# bindsym $mod+semicolon focus right
+bindsym $mod+j focus left
+bindsym $mod+k focus down
+bindsym $mod+l focus up
+bindsym $mod+semicolon focus right
 
 # 1B] alternatively, you can use the cursor keys:
 bindsym $mod+Left focus left
@@ -99,10 +128,10 @@ bindsym $mod+Up focus up
 bindsym $mod+Right focus right
 
 # 2A] move focused window
-# bindsym $mod+Shift+j move left
-# bindsym $mod+Shift+k move down
-# bindsym $mod+Shift+l move up
-# bindsym $mod+Shift+semicolon move right
+bindsym $mod+Shift+j move left
+bindsym $mod+Shift+k move down
+bindsym $mod+Shift+l move up
+bindsym $mod+Shift+semicolon move right
 
 # 2B] alternatively, you can use the cursor keys:
 bindsym $mod+Shift+Left move left
@@ -219,14 +248,19 @@ bindsym $mod+r mode "resize"
         #status_command i3blocks -c ~/.config/i3/i3blocks.conf
 #}
 
-### Launch Programs in specific workspaces
-## Open Firefox
-for_window [class="firefox"] move to workspace $ws2
-bindsym $mod+b workspace 2; exec firefox
 
-### Open spotify
-for_window [class="spotify"] move to workspace $ws5
-bindsym $mod+m workspace 5;exec spotify
+# Launch a program on a certain workspace, from rofi (which may or may not have a keybinding)
+# for_window [class="nameofapp"] move to workspace $wsno.
+# WS No. 5 has been used as example.
+# Note: You will have to launch the program from a program launcher (rofi).
+for_window [class="firefox"] move to workspace $ws5
+
+# The following way allows programs to be launched with a
+# defined keybinding, on a certain workspace, without
+# touching program launcher. Assign Programs to respective
+# workspaces.
+bindsym $mod+b workspace 5; exec firefox
+
 
 #Multi Monitor (Dual Monitor, extended monitor)
 #Replace HDMI2 with DVI-2, VGA-2, DP-2, DVI-2 etc. Get value by typing xrandr in the terminal.
@@ -235,4 +269,3 @@ bindsym $mod+m workspace 5;exec spotify
 #HDMI-X is display used in Desktop connected to monitor with HDMI Cable.
 #VGA-X is display used in Desktop connected to monitor with VGA Cable.
 exec --no-startup-id xrandr --output HDMI-2 --right-of HDMI-1 --auto
-exec --no-startup-id /usr/lib/gsd-xsettings
